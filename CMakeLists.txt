@@ -26,6 +26,7 @@ list(APPEND _source
     yf/timestamp.cc
     yf/exception.cc
     yf/fiber.cc
+    yf/config.cc
     yf/log/appender.cc
     yf/log/loglevel.cc
     yf/log/basiclayout.cc
@@ -79,8 +80,10 @@ add_executable(mutex test/test_mutex.cc)
 add_executable(thread test/test_thread.cc)
 add_executable(log test/test_log.cc)
 add_executable(exception test/test_exception.cc)
+add_executable(config test/test_config.cc)
 
 target_link_libraries(mutex yf_library)
 target_link_libraries(thread yf_library)
 target_link_libraries(log yf_library)
 target_link_libraries(exception yf_library)
+target_link_libraries(config yf_library)

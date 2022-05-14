@@ -36,6 +36,7 @@ build/
 
 # bin
 bin/*
+!bin/*.json
 !bin/README.md
 
 # .cache

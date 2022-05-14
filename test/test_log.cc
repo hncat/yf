@@ -31,15 +31,15 @@ int main(int argc, char **argv) {
     // appender->append(event);
     int line = atoi(argv[1]);
     auto category = yf::Category::GetInstance("test");
-    yf::Appender *appender1(new yf::FileAppender("file", "txt.log", true, line));
+    yf::Appender *appender1(new yf::FileAppender("file", "txt.log"));
     appender1->setLayout(yf::Layout::ptr(new yf::PatternLayout));
     category->addAppender(appender1);
     // yf::Appender::reopenAll();
     auto begin = ::clock();
-    for (int i = 0; i < 1000000; ++i) {
+    // for (int i = 0; i < 1000000; ++i) {
         // YF_LOG_WARN_FMT(category, "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx: %s", "hello");
         YF_LOG_WARN(category) << "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx: " << "hello";
-    }
+    // }
     std::cout << ((double)(::clock() - begin)) / CLOCKS_PER_SEC << std::endl;
     return 0;
 }
