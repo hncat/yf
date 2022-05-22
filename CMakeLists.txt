@@ -38,6 +38,10 @@ list(APPEND _source
     yf/log/category.cc
     yf/log/categorymanager.cc
     yf/log/logstream.cc
+    yf/json/json_reader.cpp
+    yf/json/json_value.cpp
+    yf/json/json_valueiterator.inl
+    yf/json/json_writer.cpp
 )
 
 option(USE_STATIC_LIBRARY "whether to create a static library" OFF)
