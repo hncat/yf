@@ -3,6 +3,10 @@
 #include <sys/time.h>
 
 #include "util.h"
+#include "log/basiclayout.h"
+#include "log/passthroughlayout.h"
+#include "log/patternlayout.h"
+#include "log/simplelayout.h"
 
 namespace yf {
 uint64_t getThreadId() {

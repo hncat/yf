@@ -19,6 +19,7 @@
 #include "json/json.h"
 #include "exception.h"
 #include "log/category.h"
+#include "log/fileappender.h"
 
 namespace yf {
 class Config;
@@ -328,6 +329,53 @@ struct LexicalCast<std::tuple<Args...>, Json::Value> {
         return result; 
     }
 };
+
+// template<>
+// struct LexicalCast<Json::Value, FileAppender *> {
+//     FileAppender *operator()(const Json::Value &json) const {
+//         if (!json.isObject()) {
+//             std::stringstream ss;
+//             ss << "json is not object, json date: " << json;
+//             throw LogicError(ss.str());
+//         }
+//         std::string name = *json.getMemberNames().begin();
+//         if (name.empty()) {
+//             YF_ROOT_LOG_WARN << "fileappender name is a empty!";
+//             return nullptr;
+//         }
+//         FileAppender *appender = dynamic_cast<FileAppender *>(Appender::getAppender(name));
+//         if (!appender) {
+//             YF_ROOT_LOG_WARN << "appender is a nullptr!";
+//             return nullptr;
+//         }
+//         auto filename_conf = json["filename"];
+//         if (filename_conf.isString()) {
+//             appender->setFileName(filename_conf.asString());
+//         } else if (!filename_conf.isNull()) {
+//             throw LogicError("filename_conf type is not string or null");
+//         }
+//         auto append_conf = json["append"];
+//         if (append_conf.isBool()) {
+//             appender->setAppend(append_conf.asBool());
+//         } else if (!append_conf.isNull()) {
+//             throw LogicError("append_conf type is not bool or null");
+//         }
+//         auto mode_conf = json["mode"];
+//         if (mode_conf.isString()) {
+//             appender->setMode(std::stoul(mode_conf.asString()));
+//         } else if (!append_conf.isNull()) {
+//             throw LogicError("mode_conf type is not string or null");
+//         }
+//         auto level_conf = json["level"];
+//         if (level_conf.isString()) {
+//             LogLevel::getLevel(level_conf.asString());
+//         } else if (!level_conf.isNull()) {
+//             throw LogicError("mode_conf type is not string or null");
+//         }
+//         appender->reopen();
+//         return appender;
+//     }
+// };
 
 class ConfigVarBase : Noncopyable {
 public:
